@@ -1,3 +1,30 @@
+# Instructions
+
+Run node
+
+Require and initialise the account
+
+```
+node
+const Account = require("./account");
+const account = new Account();
+
+```
+
+To deposit or withdraw from the account
+
+```
+account.deposit(num)
+account.withdraw(num)
+
+```
+
+To print the statement
+
+```
+account.print()
+```
+
 # Bank tech test
 
 Today, you'll practice doing a tech test.

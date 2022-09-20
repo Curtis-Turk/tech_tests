@@ -3,9 +3,6 @@ class Statement {
     this.transactions = transactions;
     this.printout = "";
   }
-  transactions() {
-    return this.transactions;
-  }
   makeStatement() {
     this.printout = this.header();
     this.printoutTransactions();
@@ -21,7 +18,7 @@ class Statement {
     });
   }
   header() {
-    return "date || credit || debit || balance\n";
+    return "\ndate || credit || debit || balance\n";
   }
 }
 

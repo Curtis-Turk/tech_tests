@@ -1,15 +1,9 @@
+const Statement = require("./statement");
+
 class Account {
   constructor() {
     this.balance = 0;
     this.transactions = [];
-  }
-
-  balance() {
-    return this.balance;
-  }
-
-  transactions() {
-    return this.transactions;
   }
 
   deposit(amount) {
@@ -25,13 +19,11 @@ class Account {
   date() {
     return `${new Date().toLocaleDateString("en-UK")}`;
   }
+
+  print() {
+    const statement = new Statement(this.transactions);
+    return statement.makeStatement();
+  }
 }
-
-let account = new Account();
-
-account.deposit(500);
-account.withdraw(500);
-
-// account.statement();
 
 module.exports = Account;

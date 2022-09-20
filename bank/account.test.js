@@ -3,7 +3,7 @@ const Account = require("./account");
 describe("Account", () => {
   it("starts with a 0 balance", () => {
     const account = new Account();
-    expect(account.balance).toEqual(0);
+    expect(account.balance).toBe(0);
   });
   it("can have money deposited", () => {
     const account = new Account();
@@ -53,5 +53,15 @@ describe("Account", () => {
       ["19/09/2022", 500, 0, 500],
       ["20/09/2022", 500, 0, 1000],
     ]);
+  });
+  it("Can print out a statement", () => {
+    const account = new Account();
+    const mockDate = new Date("2022-09-19T00:00:00.000Z");
+    let spy = jest.spyOn(global, "Date").mockImplementation(() => mockDate);
+    account.deposit(500);
+    spy.mockRestore();
+    expect(account.print()).toEqual(
+      "\ndate || credit || debit || balance\n19/09/2022 || 500.00 || 0.00 || 500.00\n"
+    );
   });
 });
