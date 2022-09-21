@@ -43,7 +43,7 @@ describe("Account", () => {
     jest.spyOn(global, "Date").mockImplementation(() => mockDate);
     const account = new Account();
     account.deposit(500);
-    expect(account.transactions).toEqual([["19/09/2022", 500, 0, 500]]);
+    expect(account.transactions).toEqual([["19/09/2022", 500, " ", 500]]);
   });
   it("records multiple transactions", () => {
     const mockDate = new Date("2022-09-19T00:00:00.000Z");
@@ -52,8 +52,8 @@ describe("Account", () => {
     account.deposit(500);
     account.withdraw(500);
     expect(account.transactions).toEqual([
-      ["19/09/2022", 500, 0, 500],
-      ["19/09/2022", 0, 500, 0],
+      ["19/09/2022", 500, " ", 500],
+      ["19/09/2022", " ", 500, 0],
     ]);
   });
   it("Can make a transaction on multiple days", () => {
@@ -67,8 +67,8 @@ describe("Account", () => {
     account.deposit(500);
     spy.mockRestore();
     expect(account.transactions).toEqual([
-      ["19/09/2022", 500, 0, 500],
-      ["20/09/2022", 500, 0, 1000],
+      ["19/09/2022", 500, " ", 500],
+      ["20/09/2022", 500, " ", 1000],
     ]);
   });
   it("Can print out a statement", () => {
@@ -79,7 +79,7 @@ describe("Account", () => {
     console.log = jest.fn();
     account.print();
     expect(console.log).toHaveBeenCalledWith(
-      "\ndate || credit || debit || balance\n19/09/2022 || 500.00 || 0.00 || 500.00\n"
+      "\ndate || credit || debit || balance\n19/09/2022 || 500.00 || || 500.00\n"
     );
   });
 });

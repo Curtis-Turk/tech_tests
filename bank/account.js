@@ -19,7 +19,7 @@ class Account {
       return "Deposit an amount of money";
     }
     this.balance += amount;
-    this.transactions.push([this.date(), amount, 0, this.balance]);
+    this.transactions.push([this.date(), amount, " ", this.balance]);
   }
 
   withdraw(amount) {
@@ -27,7 +27,7 @@ class Account {
       return "Deposit an amount of money";
     }
     this.balance -= amount;
-    this.transactions.push([this.date(), 0, amount, this.balance]);
+    this.transactions.push([this.date(), " ", amount, this.balance]);
   }
 
   print() {
