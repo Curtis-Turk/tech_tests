@@ -40,7 +40,7 @@ describe("Gilded Rose", function () {
     gildedRose.updateQuality();
     expect(gildedRose.items[0].quality).toBe(0);
   });
-  it("decrease the quality of an item past 0", () => {
+  it("unable to decrease the quality of an item past 0", () => {
     const gildedRose = new Shop([new Item("foo", 0, 0)]);
     gildedRose.updateQuality();
     expect(gildedRose.items[0].quality).toBe(0);
@@ -57,14 +57,14 @@ describe("Gilded Rose", function () {
     }
     expect(gildedRose.items[0].quality).toBe(50);
   });
-  it("Backstage passes increases by 2 with under 10 days left", () => {
+  xit("Backstage passes increases by 2 with under 10 days left", () => {
     const gildedRose = new Shop([
       new Item("Backstage passes to a TAFKAL80ETC concert", 10, 0),
     ]);
     gildedRose.updateQuality();
     expect(gildedRose.items[0].quality).toBe(2);
   });
-  it("Backstage passes increases by 3 with under 5 days left", () => {
+  xit("Backstage passes increases by 3 with under 5 days left", () => {
     const gildedRose = new Shop([
       new Item("Backstage passes to a TAFKAL80ETC concert", 5, 0),
     ]);
