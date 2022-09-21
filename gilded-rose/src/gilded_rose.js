@@ -17,6 +17,17 @@ class Shop {
     }
   }
 
+  backstagePasses(item) {
+    if (item.name == "Backstage passes to a TAFKAL80ETC concert") {
+      if (item.sellIn <= 10 && item.quality < 50) {
+        item.quality += 1;
+      }
+      if (item.sellIn <= 5 && item.quality < 50) {
+        item.quality += 1;
+      }
+    }
+  }
+
   updateQuality() {
     for (let i = 0; i < this.items.length; i++) {
       const item = this.items[i];
@@ -31,22 +42,8 @@ class Shop {
         }
       } else {
         if (item.quality < 50) {
+          this.backstagePasses(item);
           item.quality = item.quality + 1;
-          if (item.name == "Backstage passes to a TAFKAL80ETC concert") {
-            item.quality = item.quality - 1;
-            if (item.sellIn < 11) {
-              console.log(item.quality);
-              if (item.quality < 50) {
-                item.quality = item.quality + 1;
-              }
-            }
-            if (item.sellIn < 6) {
-              console.log(item.quality);
-              if (item.quality < 50) {
-                item.quality = item.quality + 1;
-              }
-            }
-          }
         }
       }
       this.updateSellIn(item);
