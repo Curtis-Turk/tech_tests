@@ -10,12 +10,12 @@ class Account {
     return `${new Date().toLocaleDateString("en-UK")}`;
   }
 
-  numberCheck(input) {
+  checkNumber(input) {
     return isNaN(input) || input <= 0 ? true : false;
   }
 
   deposit(amount) {
-    if (this.numberCheck(amount)) {
+    if (this.checkNumber(amount)) {
       return "Deposit an amount of money";
     }
     this.balance += amount;
@@ -23,7 +23,7 @@ class Account {
   }
 
   withdraw(amount) {
-    if (this.numberCheck(amount)) {
+    if (this.checkNumber(amount)) {
       return "Deposit an amount of money";
     }
     this.balance -= amount;

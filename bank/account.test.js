@@ -1,6 +1,9 @@
 const Account = require("./account");
 
 describe("Account", () => {
+  afterAll(() => {
+    jest.resetAllMocks();
+  });
   it("starts with a 0 balance", () => {
     const account = new Account();
     expect(account.balance).toBe(0);
@@ -15,25 +18,39 @@ describe("Account", () => {
     account.withdraw(500);
     expect(account.balance).toEqual(-500);
   });
+  it("Returns an error message when depositing NaN", () => {
+    const account = new Account();
+    expect(account.deposit("string")).toEqual("Deposit an amount of money");
+  });
+  it("Returns an error message when withdrawing NaN", () => {
+    const account = new Account();
+    expect(account.withdraw("string")).toEqual("Deposit an amount of money");
+  });
+  it("Returns an error message when depositing a negative", () => {
+    const account = new Account();
+    expect(account.deposit(-500)).toEqual("Deposit an amount of money");
+  });
+  it("Returns an error message when withdrawing a negative", () => {
+    const account = new Account();
+    expect(account.withdraw(-500)).toEqual("Deposit an amount of money");
+  });
   it("returns an empty transactions list at first", () => {
     const account = new Account();
     expect(account.transactions).toEqual([]);
   });
   it("records a whole transaction", () => {
     const mockDate = new Date("2022-09-19T00:00:00.000Z");
-    const spy = jest.spyOn(global, "Date").mockImplementation(() => mockDate);
+    jest.spyOn(global, "Date").mockImplementation(() => mockDate);
     const account = new Account();
     account.deposit(500);
-    spy.mockRestore();
     expect(account.transactions).toEqual([["19/09/2022", 500, 0, 500]]);
   });
   it("records multiple transactions", () => {
     const mockDate = new Date("2022-09-19T00:00:00.000Z");
-    const spy = jest.spyOn(global, "Date").mockImplementation(() => mockDate);
+    jest.spyOn(global, "Date").mockImplementation(() => mockDate);
     const account = new Account();
     account.deposit(500);
     account.withdraw(500);
-    spy.mockRestore();
     expect(account.transactions).toEqual([
       ["19/09/2022", 500, 0, 500],
       ["19/09/2022", 0, 500, 0],
@@ -57,27 +74,10 @@ describe("Account", () => {
   it("Can print out a statement", () => {
     const account = new Account();
     const mockDate = new Date("2022-09-19T00:00:00.000Z");
-    let spy = jest.spyOn(global, "Date").mockImplementation(() => mockDate);
+    jest.spyOn(global, "Date").mockImplementation(() => mockDate);
     account.deposit(500);
-    spy.mockRestore();
     expect(account.print()).toEqual(
       "\ndate || credit || debit || balance\n19/09/2022 || 500.00 || 0.00 || 500.00\n"
     );
-  });
-  it("Returns an error message when depositing NaN", () => {
-    const account = new Account();
-    expect(account.deposit("string")).toEqual("Deposit an amount of money");
-  });
-  it("Returns an error message when withdrawing NaN", () => {
-    const account = new Account();
-    expect(account.withdraw("string")).toEqual("Deposit an amount of money");
-  });
-  it("Returns an error message when depositing a negative", () => {
-    const account = new Account();
-    expect(account.deposit(-500)).toEqual("Deposit an amount of money");
-  });
-  it("Returns an error message when withdrawing a negative", () => {
-    const account = new Account();
-    expect(account.withdraw(-500)).toEqual("Deposit an amount of money");
   });
 });
