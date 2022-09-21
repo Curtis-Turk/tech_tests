@@ -16,14 +16,13 @@ class Statement {
     });
   }
   checkAmount(amount) {
-    // console.log(amount);
     return amount === " " ? amount : ` ${amount.toFixed(2)} `;
   }
-  makeStatement() {
+  logStatement() {
     this.transactions.reverse();
     this.printout = this.header();
     this.printoutTransactions();
-    return this.printout;
+    console.log(this.printout);
   }
 }
 

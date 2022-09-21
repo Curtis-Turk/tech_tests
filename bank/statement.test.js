@@ -17,7 +17,9 @@ describe("Statement", () => {
   });
   it("Can return a formatted statement with a transaction", () => {
     const statement = new Statement([["19/09/2022", 500, " ", 500]]);
-    expect(statement.makeStatement()).toEqual(
+    console.log = jest.fn();
+    statement.logStatement();
+    expect(console.log).toHaveBeenCalledWith(
       "\ndate || credit || debit || balance\n19/09/2022 || 500.00 || || 500.00\n"
     );
   });
@@ -27,7 +29,9 @@ describe("Statement", () => {
       ["20/09/2022", " ", 500, 0],
     ];
     const statement = new Statement(transactions);
-    expect(statement.makeStatement()).toEqual(
+    console.log = jest.fn();
+    statement.logStatement();
+    expect(console.log).toHaveBeenCalledWith(
       "\ndate || credit || debit || balance\n20/09/2022 || || 500.00 || 0.00\n19/09/2022 || 500.00 || || 500.00\n"
     );
   });
