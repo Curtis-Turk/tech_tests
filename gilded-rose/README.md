@@ -1,7 +1,5 @@
 # Gilded Rose
 
-This is the Gilded Rose kata in JavaScript with Jest
-
 ## Getting started
 
 Install dependencies
@@ -15,17 +13,17 @@ npm install
 To run all tests
 
 ```sh
-npm test
+jest
+```
+
+To generate test coverage report
+
+```sh
+jest --coverage
 ```
 
 To run all tests in watch mode
 
 ```sh
 npm run test:watch
-```
-
-To generate test coverage report
-
-```sh
-npm run test:coverage
 ```
