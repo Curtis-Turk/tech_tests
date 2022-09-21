@@ -76,7 +76,9 @@ describe("Account", () => {
     const mockDate = new Date("2022-09-19T00:00:00.000Z");
     jest.spyOn(global, "Date").mockImplementation(() => mockDate);
     account.deposit(500);
-    expect(account.print()).toEqual(
+    console.log = jest.fn();
+    account.print();
+    expect(console.log).toHaveBeenCalledWith(
       "\ndate || credit || debit || balance\n19/09/2022 || 500.00 || 0.00 || 500.00\n"
     );
   });
