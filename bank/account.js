@@ -32,7 +32,7 @@ class Account {
 
   print() {
     const statement = new Statement(this.transactions);
-    return statement.makeStatement();
+    console.log(statement.makeStatement());
   }
 }
 
