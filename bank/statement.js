@@ -3,10 +3,8 @@ class Statement {
     this.transactions = transactions;
     this.printout = "";
   }
-  makeStatement() {
-    this.printout = this.header();
-    this.printoutTransactions();
-    return this.printout;
+  header() {
+    return "\ndate || credit || debit || balance\n";
   }
   printoutTransactions() {
     this.transactions.forEach((transaction) => {
@@ -17,8 +15,11 @@ class Statement {
       this.printout += `${date} || ${credit} || ${debit} || ${balance}\n`;
     });
   }
-  header() {
-    return "\ndate || credit || debit || balance\n";
+  makeStatement() {
+    this.transactions.reverse();
+    this.printout = this.header();
+    this.printoutTransactions();
+    return this.printout;
   }
 }
 

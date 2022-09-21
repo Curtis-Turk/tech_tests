@@ -28,7 +28,7 @@ describe("Statement", () => {
     ];
     const statement = new Statement(transactions);
     expect(statement.makeStatement()).toEqual(
-      "\ndate || credit || debit || balance\n19/09/2022 || 500.00 || 0.00 || 500.00\n20/09/2022 || 0.00 || 500.00 || 0.00\n"
+      "\ndate || credit || debit || balance\n20/09/2022 || 0.00 || 500.00 || 0.00\n19/09/2022 || 500.00 || 0.00 || 500.00\n"
     );
   });
 });

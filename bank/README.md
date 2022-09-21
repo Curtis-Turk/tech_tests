@@ -1,4 +1,10 @@
-# Instructions
+# Running instructions
+
+Install dependancies
+
+```
+npm install
+```
 
 Run node
 
@@ -23,6 +29,12 @@ To print the statement
 
 ```
 account.print()
+```
+
+# Testing
+
+```
+jest
 ```
 
 # Bank tech test

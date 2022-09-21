@@ -6,18 +6,28 @@ class Account {
     this.transactions = [];
   }
 
+  date() {
+    return `${new Date().toLocaleDateString("en-UK")}`;
+  }
+
+  numberCheck(input) {
+    return isNaN(input) || input <= 0 ? true : false;
+  }
+
   deposit(amount) {
+    if (this.numberCheck(amount)) {
+      return "Deposit an amount of money";
+    }
     this.balance += amount;
     this.transactions.push([this.date(), amount, 0, this.balance]);
   }
 
   withdraw(amount) {
+    if (this.numberCheck(amount)) {
+      return "Deposit an amount of money";
+    }
     this.balance -= amount;
     this.transactions.push([this.date(), 0, amount, this.balance]);
-  }
-
-  date() {
-    return `${new Date().toLocaleDateString("en-UK")}`;
   }
 
   print() {

@@ -64,4 +64,20 @@ describe("Account", () => {
       "\ndate || credit || debit || balance\n19/09/2022 || 500.00 || 0.00 || 500.00\n"
     );
   });
+  it("Returns an error message when depositing NaN", () => {
+    const account = new Account();
+    expect(account.deposit("string")).toEqual("Deposit an amount of money");
+  });
+  it("Returns an error message when withdrawing NaN", () => {
+    const account = new Account();
+    expect(account.withdraw("string")).toEqual("Deposit an amount of money");
+  });
+  it("Returns an error message when depositing a negative", () => {
+    const account = new Account();
+    expect(account.deposit(-500)).toEqual("Deposit an amount of money");
+  });
+  it("Returns an error message when withdrawing a negative", () => {
+    const account = new Account();
+    expect(account.withdraw(-500)).toEqual("Deposit an amount of money");
+  });
 });
