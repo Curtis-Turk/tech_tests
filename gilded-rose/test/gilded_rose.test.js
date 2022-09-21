@@ -29,14 +29,18 @@ describe("Gilded Rose", function () {
     gildedRose.updateQuality();
     expect(gildedRose.items[0].sellIn).toBe(0);
   });
-  it("decrease the sellIn of an item if updateQuality is called twice", () => {
+  fit("decrease the sellIn of an item if updateQuality is called twice", () => {
     const gildedRose = new Shop([new Item("foo", 1, 1)]);
+    console.log(gildedRose.items);
     gildedRose.updateQuality();
+    console.log(gildedRose.items);
     gildedRose.updateQuality();
+    console.log(gildedRose.items);
     expect(gildedRose.items[0].sellIn).toBe(-1);
   });
   it("decrease the quality of an item by two if past sellIn", () => {
     const gildedRose = new Shop([new Item("foo", -1, 2)]);
+
     gildedRose.updateQuality();
     expect(gildedRose.items[0].quality).toBe(0);
   });
@@ -45,11 +49,17 @@ describe("Gilded Rose", function () {
     gildedRose.updateQuality();
     expect(gildedRose.items[0].quality).toBe(0);
   });
-  it("Should increase the quality of Aged Brie", () => {
+  xit("increase the quality of Aged Brie", () => {
     const gildedRose = new Shop([new Item("Aged Brie", 0, 0)]);
-    console.log(gildedRose.items);
     gildedRose.updateQuality();
-    console.log(gildedRose.items);
     expect(gildedRose.items[0].quality).toBe(1);
+  });
+  xit("Can never have an item above 50 quality", () => {
+    const gildedRose = new Shop([new Item("Aged Brie", 0, 0)]);
+    for (i = 0; i < 60; i++) {
+      gildedRose.updateQuality();
+    }
+    console.log(gildedRose.items[0].quality);
+    expect(gildedRose.items[0].quality).toBe(50);
   });
 });

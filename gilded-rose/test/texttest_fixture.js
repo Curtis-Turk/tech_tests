@@ -14,7 +14,7 @@ const items = [
   new Item("Conjured Mana Cake", 3, 6),
 ];
 
-const days = Number(process.argv[2]) || 2;
+const days = Number(process.argv[4]) || 4;
 const gildedRose = new Shop(items);
 
 for (let day = 0; day < days; day++) {
