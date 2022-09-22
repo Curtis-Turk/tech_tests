@@ -83,3 +83,7 @@ date || credit || debit || balance
 13/01/2023 || 2000.00 || || 3000.00
 10/01/2023 || 1000.00 || || 1000.00
 ```
+
+## Example
+
+![screenshot](/img/Screenshot%202022-09-22%20at%2011.42.47.png)
