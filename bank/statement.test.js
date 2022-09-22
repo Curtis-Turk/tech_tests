@@ -12,11 +12,11 @@ describe("Statement", () => {
     );
   });
   it("Returns the transactions", () => {
-    const statement = new Statement([["19/09/2022", 500, " ", 500]]);
-    expect(statement.transactions).toEqual([["19/09/2022", 500, " ", 500]]);
+    const statement = new Statement([["19/09/2022", 500, " "]]);
+    expect(statement.transactions).toEqual([["19/09/2022", 500, " "]]);
   });
   it("Can return a formatted statement with a transaction", () => {
-    const statement = new Statement([["19/09/2022", 500, " ", 500]]);
+    const statement = new Statement([["19/09/2022", 500, " "]]);
     console.log = jest.fn();
     statement.logStatement();
     expect(console.log).toHaveBeenCalledWith(
@@ -25,10 +25,23 @@ describe("Statement", () => {
   });
   it("Can return a formatted statement for multiple days", () => {
     let transactions = [
-      ["19/09/2022", 500, " ", 500],
-      ["20/09/2022", " ", 500, 0],
+      ["19/09/2022", 500, " "],
+      ["20/09/2022", " ", 500],
     ];
     const statement = new Statement(transactions);
+    console.log = jest.fn();
+    statement.logStatement();
+    expect(console.log).toHaveBeenCalledWith(
+      "\ndate || credit || debit || balance\n20/09/2022 || || 500.00 || 0.00\n19/09/2022 || 500.00 || || 500.00\n"
+    );
+  });
+  it.only("Can add a balance to the transations", () => {
+    let transactions = [
+      ["19/09/2022", 500, " "],
+      ["20/09/2022", " ", 500],
+    ];
+    const statement = new Statement(transactions);
+    statement.addBalance();
     console.log = jest.fn();
     statement.logStatement();
     expect(console.log).toHaveBeenCalledWith(

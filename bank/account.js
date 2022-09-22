@@ -2,11 +2,10 @@ const Statement = require("./statement");
 
 class Account {
   constructor() {
-    this.balance = 0;
     this.transactions = [];
   }
 
-  date() {
+  getDate() {
     return `${new Date().toLocaleDateString("en-UK")}`;
   }
 
@@ -15,19 +14,13 @@ class Account {
   }
 
   deposit(amount) {
-    if (this.checkNumber(amount)) {
-      return "Deposit an amount of money";
-    }
-    this.balance += amount;
-    this.transactions.push([this.date(), amount, " ", this.balance]);
+    if (this.checkNumber(amount)) return "Deposit an amount of money";
+    this.transactions.push([this.getDate(), amount, " "]);
   }
 
   withdraw(amount) {
-    if (this.checkNumber(amount)) {
-      return "Deposit an amount of money";
-    }
-    this.balance -= amount;
-    this.transactions.push([this.date(), " ", amount, this.balance]);
+    if (this.checkNumber(amount)) return "Deposit an amount of money";
+    this.transactions.push([this.getDate(), " ", amount]);
   }
 
   print() {
