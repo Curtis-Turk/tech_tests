@@ -51,25 +51,36 @@ describe("Gilded Rose", function () {
     expect(gildedRose.items[0].quality).toBe(1);
   });
   it("Can never have an item above 50 quality", () => {
-    const gildedRose = new Shop([new Item("Aged Brie", 0, 0)]);
+    const gildedRose = new Shop([
+      new Item("Aged Brie", 0, 0),
+      new Item("Backstage passes to a TAFKAL80ETC concert", 61, 40),
+    ]);
     for (i = 0; i < 60; i++) {
-      // console.log(gildedRose.items[0].quality);
       gildedRose.updateQuality();
     }
     expect(gildedRose.items[0].quality).toBe(50);
+    expect(gildedRose.items[1].quality).toBe(50);
   });
-  xit("Backstage passes increases by 2 with under 10 days left", () => {
+  it("Backstage passes increases by 2 with under 10 days left", () => {
     const gildedRose = new Shop([
       new Item("Backstage passes to a TAFKAL80ETC concert", 10, 0),
     ]);
     gildedRose.updateQuality();
     expect(gildedRose.items[0].quality).toBe(2);
   });
-  xit("Backstage passes increases by 3 with under 5 days left", () => {
+  it("Backstage passes increases by 3 with under 5 days left", () => {
     const gildedRose = new Shop([
       new Item("Backstage passes to a TAFKAL80ETC concert", 5, 0),
     ]);
     gildedRose.updateQuality();
     expect(gildedRose.items[0].quality).toBe(3);
+  });
+  it("Nothing gets changed for Sulfuras", () => {
+    const gildedRose = new Shop([
+      new Item("Sulfuras, Hand of Ragnaros", 10, 10),
+    ]);
+    gildedRose.updateQuality();
+    expect(gildedRose.items[0].quality).toBe(10);
+    expect(gildedRose.items[0].sellIn).toBe(10);
   });
 });
