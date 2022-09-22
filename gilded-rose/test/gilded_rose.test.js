@@ -1,6 +1,10 @@
 const { Shop, Item } = require("../src/gilded_rose");
 
 describe("Gilded Rose", function () {
+  it("initialises with an array", () => {
+    const gildedRose = new Shop();
+    expect(gildedRose.items).toEqual([]);
+  });
   it("able to add an item", () => {
     const gildedRose = new Shop([new Item("foo", 0, 0)]);
     expect(gildedRose.items[0].name).toBe("foo");
@@ -18,8 +22,8 @@ describe("Gilded Rose", function () {
     gildedRose.updateQuality();
     expect(gildedRose.items[0].quality).toBe(0);
   });
-  it.only("decrease the quality of an item if updateQuality is called twice", () => {
-    const gildedRose = new Shop([new Item("foo", 1, 2)]);
+  it("decrease the quality of an item if updateQuality is called twice", () => {
+    const gildedRose = new Shop([new Item("foo", 2, 2)]);
     gildedRose.updateQuality();
     gildedRose.updateQuality();
     expect(gildedRose.items[0].quality).toBe(0);
@@ -50,7 +54,7 @@ describe("Gilded Rose", function () {
     gildedRose.updateQuality();
     expect(gildedRose.items[0].quality).toBe(1);
   });
-  it("Can never have an item above 50 quality", () => {
+  it("Can never incerease item quality above 50", () => {
     const gildedRose = new Shop([
       new Item("Aged Brie", 0, 0),
       new Item("Backstage passes to a TAFKAL80ETC concert", 61, 40),
@@ -86,10 +90,15 @@ describe("Gilded Rose", function () {
   });
   it("Nothing gets changed for Sulfuras", () => {
     const gildedRose = new Shop([
-      new Item("Sulfuras, Hand of Ragnaros", 10, 10),
+      new Item("Sulfuras, Hand of Ragnaros", 10, 80),
     ]);
     gildedRose.updateQuality();
-    expect(gildedRose.items[0].quality).toBe(10);
+    expect(gildedRose.items[0].quality).toBe(80);
     expect(gildedRose.items[0].sellIn).toBe(10);
+  });
+  it("Conjured Items degrade twice as fast", () => {
+    const gildedRose = new Shop([new Item("Conjured Mana Cake", 10, 10)]);
+    gildedRose.updateQuality();
+    expect(gildedRose.items[0].quality).toBe(8);
   });
 });

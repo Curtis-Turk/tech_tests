@@ -27,27 +27,29 @@ class Shop {
         case "Backstage passes to a TAFKAL80ETC concert":
           this.backstagePasses(item);
           break;
+        case "Conjured Mana Cake":
+          this.conjuredItem(item);
+          break;
         default:
           this.basicItem(item);
           break;
       }
-      console.log("q" + item.quality);
-      console.log(item.sellIn);
-      this.qualityLimit(item.quality);
+      this.qualityLimit(item);
     }
 
     return this.items;
   }
 
   basicItem(item) {
-    item.quality -= 1;
     if (item.sellIn < 0) {
+      item.quality -= 2;
+    } else {
       item.quality -= 1;
     }
   }
 
-  qualityLimit(quality) {
-    if (quality < 0) quality = 0;
+  qualityLimit(item) {
+    if (item.quality < 0) item.quality = 0;
   }
 
   under50Limit(quality) {
@@ -60,16 +62,16 @@ class Shop {
 
   backstagePasses(item) {
     if (this.under50Limit(item.quality)) {
-      if (item.sellIn <= 10) {
-        item.quality += 2;
-      }
-      if (item.sellIn <= 5) {
-        item.quality += 1;
-      }
+      if (item.sellIn <= 10) item.quality += 2;
+      if (item.sellIn <= 5) item.quality += 1;
     }
     if (item.sellIn <= 0) item.quality = 0;
   }
-  conjured(item) {}
+
+  conjuredItem(item) {
+    this.basicItem(item);
+    this.basicItem(item);
+  }
 }
 
 module.exports = {
