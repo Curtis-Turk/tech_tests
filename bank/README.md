@@ -86,4 +86,4 @@ date || credit || debit || balance
 
 ## Example
 
-![screenshot](/img/Screenshot%202022-09-22%20at%2011.42.47.png)
+![screenshot](./img/Screenshot%202022-09-22%20at%2011.42.47.png)
