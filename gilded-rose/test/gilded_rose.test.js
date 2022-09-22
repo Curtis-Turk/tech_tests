@@ -53,6 +53,7 @@ describe("Gilded Rose", function () {
   it("Can never have an item above 50 quality", () => {
     const gildedRose = new Shop([new Item("Aged Brie", 0, 0)]);
     for (i = 0; i < 60; i++) {
+      // console.log(gildedRose.items[0].quality);
       gildedRose.updateQuality();
     }
     expect(gildedRose.items[0].quality).toBe(50);
