@@ -18,7 +18,7 @@ describe("Gilded Rose", function () {
     gildedRose.updateQuality();
     expect(gildedRose.items[0].quality).toBe(0);
   });
-  it("decrease the quality of an item if updateQuality is called twice", () => {
+  it.only("decrease the quality of an item if updateQuality is called twice", () => {
     const gildedRose = new Shop([new Item("foo", 1, 2)]);
     gildedRose.updateQuality();
     gildedRose.updateQuality();
@@ -74,6 +74,15 @@ describe("Gilded Rose", function () {
     ]);
     gildedRose.updateQuality();
     expect(gildedRose.items[0].quality).toBe(3);
+  });
+  it("Backstage passes goes to 0 on or after the sellIn", () => {
+    const gildedRose = new Shop([
+      new Item("Backstage passes to a TAFKAL80ETC concert", 0, 50),
+      new Item("Backstage passes to a TAFKAL80ETC concert", -1, 50),
+    ]);
+    gildedRose.updateQuality();
+    expect(gildedRose.items[0].quality).toBe(0);
+    expect(gildedRose.items[1].quality).toBe(0);
   });
   it("Nothing gets changed for Sulfuras", () => {
     const gildedRose = new Shop([

@@ -31,24 +31,35 @@ class Shop {
           this.basicItem(item);
           break;
       }
+      console.log("q" + item.quality);
+      console.log(item.sellIn);
+      this.qualityLimit(item.quality);
     }
 
     return this.items;
   }
 
   basicItem(item) {
-    if (item.quality > 0) item.quality -= 1;
-    if (item.sellIn < 0 && item.quality > 0) {
+    item.quality -= 1;
+    if (item.sellIn < 0) {
       item.quality -= 1;
     }
   }
 
+  qualityLimit(quality) {
+    if (quality < 0) quality = 0;
+  }
+
+  under50Limit(quality) {
+    return quality < 50 ? true : false;
+  }
+
   agedBrie(item) {
-    if (this.under50(item.quality)) item.quality += 1;
+    if (this.under50Limit(item.quality)) item.quality += 1;
   }
 
   backstagePasses(item) {
-    if (this.under50(item.quality)) {
+    if (this.under50Limit(item.quality)) {
       if (item.sellIn <= 10) {
         item.quality += 2;
       }
@@ -58,9 +69,7 @@ class Shop {
     }
     if (item.sellIn <= 0) item.quality = 0;
   }
-  under50(quality) {
-    return quality < 50 ? true : false;
-  }
+  conjured(item) {}
 }
 
 module.exports = {
